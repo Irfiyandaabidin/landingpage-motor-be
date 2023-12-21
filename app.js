@@ -30,3 +30,5 @@ app.use('/api/v1/user', UserRoute);
 app.listen(PORT, () => {
   console.log(`Server jalan di port: ${PORT}`)
 });
+
+module.exports = app;
