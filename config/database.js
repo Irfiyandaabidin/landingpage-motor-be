@@ -11,6 +11,7 @@ module.exports = {
         rejectUnauthorized: false, // Set to false if using self-signed certificates
       },
     },
+    logging: console.log,
   },
   test: {
     username: process.env.POSTGRES_USER,
@@ -24,6 +25,7 @@ module.exports = {
         rejectUnauthorized: false, // Set to false if using self-signed certificates
       },
     },
+    logging: console.log,
   },
   production: {
     username: process.env.POSTGRES_USER,
@@ -37,5 +39,6 @@ module.exports = {
         rejectUnauthorized: false, // Set to false if using self-signed certificates
       },
     },
+    logging: console.log,
   },
 };
