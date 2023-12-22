@@ -1,4 +1,5 @@
 const { Motorcycle } = require("../models");
+const imagekit = require("../lib/imagekit");
 
 const getMotor = async (req, res) => {
   try {
@@ -43,11 +44,24 @@ const getMotorById = async (req, res) => {
 const createMotor = async (req, res) => {
   const { brand, model, year, price } = req.body;
   try {
+    const file = req.file;
+    let img;
+    if(file) {
+      const split = file.originalname.split(".");
+      const extension = split[split.length - 1];
+
+      const uploadedImage = await imagekit.upload({
+        file: file.buffer,
+        fileName: `IMG-${Date.now()}.${extension}`,
+      });
+      img = uploadedImage.url;
+    }
     const newMotor = await Motorcycle.create({
       brand, 
       model, 
       year, 
-      price
+      price,
+      image: img
     })
     res.status(201).json({
       status: "Success",
@@ -66,11 +80,24 @@ const createMotor = async (req, res) => {
 const updateMotor = async (req, res) => {
   const { brand, model, year, price } = req.body;
   try {
+    const file = req.file;
+    let img;
+    if(file) {
+      const split = file.originalname.split(".");
+      const extension = split[split.length - 1];
+
+      const uploadedImage = await imagekit.upload({
+        file: file.buffer,
+        fileName: `IMG-${Date.now()}.${extension}`,
+      });
+      img = uploadedImage.url;
+    };
     const newMotor = await Motorcycle.update({
       brand, 
       model, 
       year, 
-      price
+      price,
+      image: img && img
     },
     {
       where: {
