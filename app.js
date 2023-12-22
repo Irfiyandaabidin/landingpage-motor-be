@@ -8,6 +8,7 @@ const UserRoute = require("./routes/UserRoute")
 const cors = require("cors");
 const { Sequelize } = require('sequelize');
 const config = require('./config/database');
+const pg = require("pg");
 
 const sequelize = new Sequelize(config.development);
 
